@@ -1,14 +1,21 @@
-# 第一步：使用轻量级 nginx 镜像
-FROM nginx:alpine
+# Step 1: Use a Node.js runtime as the base image
+FROM node:18-alpine
 
-# 可选：在构建时将工作目录置为默认 nginx 静态文件路径
-WORKDIR /usr/share/nginx/html
+# Step 2: Set the working directory in the container
+WORKDIR /app
 
-# 将本地项目内容（HTML、JS、资源等）复制到镜像中
+# Step 3: Copy package.json and package-lock.json (if available)
+COPY package*.json ./
+
+# Step 4: Install dependencies
+RUN npm install
+
+# Step 5: Copy all other application files into the container
+# This includes your original index.html, the new server.js, and login.html
 COPY . .
 
-# 暴露端口（默认 nginx 会监听 80）
+# Step 6: Expose the port the app runs on
 EXPOSE 80
 
-# 启动 nginx 服务，走前台模式
-CMD ["nginx", "-g", "daemon off;"]
+# Step 7: Define the command to run the application
+CMD ["node", "server.js"]

@@ -1,0 +1,13 @@
+{
+  "name": "m3u8-player-auth",
+  "version": "1.0.0",
+  "description": "A simple auth gateway for the m3u8 player.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "cookie-parser": "^1.4.5"
+  }
+}
